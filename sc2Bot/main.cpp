@@ -2,6 +2,7 @@
 
 #include <sc2api\sc2_api.h>
 #include <iostream>
+#include "WorkerManager.h"
 
 class Bot : public sc2::Agent
 {
@@ -9,6 +10,7 @@ public:
 	Bot()
 	{
 		overloadContstructing = false;
+		mWorkerManager = new CWorkerManager(this->Observation(), this->Actions());
 	}
 	//! Called when a game is started after a load. Fast restarting will not call this.
 	virtual void OnGameFullStart() {}
@@ -62,6 +64,10 @@ public:
 		{
 			overloadContstructing = false;
 		}
+		else if (unit.unit_type.ToType() == sc2::UNIT_TYPEID::ZERG_DRONE)
+		{
+			mWorkerManager->WorkerCreated(&unit);
+		}
 	}
 
 	//! Called when a unit becomes idle, this will only occur as an event so will only be called when the unit becomes
@@ -104,6 +110,7 @@ public:
 
 private:
 	bool overloadContstructing;
+	CWorkerManager* mWorkerManager;
 };
 
 int main(int argc, char* argv[])
