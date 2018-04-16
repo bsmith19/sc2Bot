@@ -10,7 +10,7 @@ public:
 	Bot()
 	{
 		overloadContstructing = false;
-		mWorkerManager = new CWorkerManager(this->Observation(), this->Actions());
+		mWorkerManager = new CWorkerManager(this->Observation(), this->Actions(), sc2::Race::Zerg);
 	}
 	//! Called when a game is started after a load. Fast restarting will not call this.
 	virtual void OnGameFullStart() {}
@@ -25,6 +25,7 @@ public:
 	//! In a real time game the user will be responsible for calling GetObservation() via the ObservationInterface.
 	virtual void OnStep() 
 	{
+		
 		if (!overloadContstructing && (this->Observation()->GetFoodUsed() >= (this->Observation()->GetFoodCap() - 1)))
 		{
 			if (this->Observation()->GetMinerals() >= 100)
@@ -60,13 +61,14 @@ public:
 	//!< \param unit The created unit.
 	virtual void OnUnitCreated(const sc2::Unit& unit)
 	{
+		
 		if (unit.unit_type.ToType() == sc2::UNIT_TYPEID::ZERG_OVERLORD)
 		{
 			overloadContstructing = false;
 		}
 		else if (unit.unit_type.ToType() == sc2::UNIT_TYPEID::ZERG_DRONE)
 		{
-			mWorkerManager->WorkerCreated(&unit);
+			//mWorkerManager->WorkerCreated(&unit);
 		}
 	}
 
@@ -77,6 +79,7 @@ public:
 	//!< \param unit The idle unit.
 	virtual void OnUnitIdle(const sc2::Unit& unit)
 	{
+		
 		switch (unit.unit_type.ToType())
 		{
 			case sc2::UNIT_TYPEID::ZERG_HATCHERY:

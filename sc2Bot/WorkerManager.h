@@ -1,5 +1,8 @@
 #ifndef __WORKERMANAGER_H__
 #define __WORKERMANAGER_H__
+
+#define _SCL_SECURE_NO_WARNINGS
+
 #include <list>
 #include <sc2api\sc2_api.h>
 
@@ -16,9 +19,8 @@ public:
 private:
 	const sc2::ObservationInterface* mObservation;
 	sc2::ActionInterface* mAction;
-	sc2::Race mRace;
+	const sc2::Race mRace;
 
 	std::list<const sc2::Unit*> mWorkerList;
 };
-
 #endif

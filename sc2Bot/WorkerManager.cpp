@@ -1,6 +1,7 @@
 #include "WorkerManager.h"
+//#include <sc2api\sc2_api.h>
 
-CWorkerManager::CWorkerManager(const sc2::ObservationInterface* obsInt, sc2::ActionInterface* actInt, sc2::Race race)
+CWorkerManager::CWorkerManager(const sc2::ObservationInterface* obsInt, sc2::ActionInterface* actInt, const sc2::Race race)
 	: mObservation(obsInt), mAction(actInt), mRace(race)
 {
 }
@@ -18,6 +19,7 @@ void CWorkerManager::DoStep()
 
 void CWorkerManager::WorkerCreated(const sc2::Unit* newWorker)
 {
+	
 	if (newWorker != nullptr)
 	{
 		mWorkerList.push_back(newWorker);
@@ -26,6 +28,7 @@ void CWorkerManager::WorkerCreated(const sc2::Unit* newWorker)
 
 void CWorkerManager::WorkerBuild()
 {
+	
 	sc2::Filter f;
 	sc2::AbilityID id;
 	switch (mRace)
@@ -52,5 +55,5 @@ void CWorkerManager::WorkerBuild()
 
 void CWorkerManager::BuildStructure(sc2::AbilityID id)
 {
-	mAction->UnitCommand(mWorkerList.front()->tag, id);
+	//mAction->UnitCommand(mWorkerList.front()->tag, id);
 }
