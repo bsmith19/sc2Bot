@@ -68,7 +68,7 @@ public:
 		}
 		else if (unit.unit_type.ToType() == sc2::UNIT_TYPEID::ZERG_DRONE)
 		{
-			//mWorkerManager->WorkerCreated(&unit);
+			mWorkerManager->WorkerCreated(&unit);
 		}
 	}
 
@@ -84,7 +84,7 @@ public:
 		{
 			case sc2::UNIT_TYPEID::ZERG_HATCHERY:
 			{
-				//this->Actions()->UnitCommand(unit, sc2::ABILITY_ID::TRAIN_DRONE);
+				this->Actions()->UnitCommand(unit, sc2::ABILITY_ID::TRAIN_DRONE);
 				break;
 			}
 		}
